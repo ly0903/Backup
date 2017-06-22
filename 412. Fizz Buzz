@@ -27,3 +27,9 @@ class Solution(object):
             else:
                 results.append(str(i))
         return results
+
+'''
+s = Solution()
+i = input()
+print s.fizzBuzz(i)
+'''
