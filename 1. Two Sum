@@ -1,0 +1,38 @@
+"""
+Given an array of integers, return indices of the two numbers such that they add up to a specific target.
+
+You may assume that each input would have exactly one solution, and you may not use the same element twice.
+"""
+
+#1 too slow O(n^2)
+class Solution(object):
+    def twoSum(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        for i in range(0, len(nums)):
+            for j in range(i+1, len(nums)):
+                    if nums[i] + nums[j] == target:
+                        return i, j
+      
+#2 much quicker
+class Solution(object):
+    def twoSum(self, nums, target):
+        d={}
+        for i,num in enumerate(nums):
+            if target-num in d:
+                return d[target-num], i
+            d[num]=i
+            
+#3 much quicker
+class Solution(object):
+    def twoSum(self, nums, target):
+        map = {}
+        for i in range(len(nums)):
+            if nums[i] not in map:
+                map[target - nums[i]] = i
+            else:
+                return map[nums[i]], i
+        return -1, -1
