@@ -5,6 +5,10 @@ Both of you are very clever and have optimal strategies for the game. Write a fu
 
 For example, if there are 4 stones in the heap, then you will never win the game: no matter 1, 2, or 3 stones you remove, the last stone will always be removed by your friend.
 """
+
+# if n = 4i (i is a positive interger), you will lose.
+
+#1
 class Solution(object):
     def canWinNim(self, n):
         """
@@ -16,4 +20,21 @@ class Solution(object):
         else:
             return True
 
-# if n = 4i (i is a positive interger), you will lose.
+#2
+ class Solution(object):
+def canWinNim(self, n):
+    """
+    :type n: int
+    :rtype: bool
+    """
+    return bool(n % 4)
+
+#3
+class Solution(object):
+def canWinNim(self, n):
+    """
+    :type n: int
+    :rtype: bool
+    """
+    return bool(n & 3) 
+    #3 is 0b11, 4 is 0b100, 4s & 3 == 0
