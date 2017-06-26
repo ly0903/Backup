@@ -11,8 +11,9 @@ If there are n buckets and a pig drinking poison will die within m minutes, how 
 # total buckets = n
 # minutes to die = m
 # minutes to test = p
-# n <= (m/p+1)^k
-# k = ceiling[log(m/p+1)(n)]
+# possible states of a pig within p minutes = p/m + 1
+# n <= (p/m + 1)^k
+# k = ceiling[log(p/m + 1)(n)]
 
 #1
 class Solution(object):
