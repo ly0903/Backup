@@ -1,0 +1,20 @@
+"""
+How would you print just the 10th line of a file?
+"""
+
+# Bash
+
+#1
+awk 'NR == 10' file.txt
+
+#NR: the current row number (start from 1).
+#Because the default action of awk is {print $0}, we can ignore the action.
+
+
+#2
+sed -n '10p' file.txt
+
+#'10p' should be seperated in 2 parts. '10' and 'p'
+#'10' means the 10th line.
+#'p' means print to stdout
+# without -n, it prints out all the lines, plus the 10th line.
