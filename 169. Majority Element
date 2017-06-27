@@ -1,0 +1,60 @@
+"""
+Given an array of size n, find the majority element. The majority element is the element that appears more than ⌊ n/2 ⌋ times.
+
+You may assume that the array is non-empty and the majority element always exist in the array.
+"""
+
+#1
+class Solution(object):
+    def majorityElement(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        record = []
+        dic = {}
+        for i in range(0, len(nums)):
+            if nums[i] not in record:
+                record.append(nums[i])
+                dic[nums[i]] = nums.count(nums[i])
+            else: continue
+        return max(dic, key = dic.get)
+
+#2 two pass + dictionary
+def majorityElement(self, nums):
+    dic = {}
+    for num in nums:
+        dic[num] = dic.get(num, 0) + 1
+    for num in nums:
+        if dic[num] > len(nums)//2:
+            return num
+    
+#3 one pass + dictionary
+def majorityElement(self, nums):
+    dic = {}
+    for num in nums:
+        if num not in dic:
+            dic[num] = 1
+        if dic[num] > len(nums)//2:
+            return num
+        else:
+            dic[num] += 1 
+
+#4 TLE
+def majorityElement(self, nums):
+    for i in xrange(len(nums)):
+        count = 0
+        for j in xrange(len(nums)):
+            if nums[j] == nums[i]:
+                count += 1
+        if count > len(nums)//2:
+            return nums[i]
+            
+#5 Sorting. Time complexity: nlog(n) [Python used Timsort for the sorting algorithm]
+class Solution(object):
+    def majorityElement(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        return sorted(nums)[len(nums)/2]
