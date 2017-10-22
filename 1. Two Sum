@@ -2,9 +2,55 @@
 Given an array of integers, return indices of the two numbers such that they add up to a specific target.
 
 You may assume that each input would have exactly one solution, and you may not use the same element twice.
+
+Example:
+Given nums = [2, 7, 11, 15], target = 9,
+
+Because nums[0] + nums[1] = 2 + 7 = 9,
+return [0, 1].
 """
 
-#1 too slow O(n^2)
+//CPP 1 
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        unordered_map<int, int> hash;
+        vector<int> result;
+        for (int i = 0; i < nums.size(); i++){
+            int added_num = target - nums[i];
+            //if found, return them
+            if (hash.find(added_num) != hash.end()){
+                result.push_back(hash[added_num]);
+                result.push_back(i);
+                return result;
+            }
+            //else, add it to map
+            hash[nums[i]] = i;
+        }
+        return result;
+    }
+};
+
+//CPP 2 neater
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+    unordered_map<int, int> imap;
+    
+    for (int i = 0;; ++i) {
+        auto it = imap.find(target - nums[i]);
+        
+        if (it != imap.end()) 
+            return vector<int> {i, it->second};
+            
+        imap[nums[i]] = i;
+        }
+    }
+};
+
+
+
+#PYTHON1 too slow O(n^2)
 class Solution(object):
     def twoSum(self, nums, target):
         """
@@ -16,17 +62,15 @@ class Solution(object):
             for j in range(i+1, len(nums)):
                     if nums[i] + nums[j] == target:
                         return i, j
-      
-#2 much quicker
+#PYTHON2 much quicker
 class Solution(object):
     def twoSum(self, nums, target):
         d={}
         for i,num in enumerate(nums):
             if target-num in d:
                 return d[target-num], i
-            d[num]=i
-            
-#3 much quicker
+            d[num]=i            
+#PYTHON3 much quicker
 class Solution(object):
     def twoSum(self, nums, target):
         map = {}
