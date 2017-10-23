@@ -1,0 +1,41 @@
+'''
+Given a string containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+
+The brackets must close in the correct order, "()" and "()[]{}" are all valid but "(]" and "([)]" are not.
+'''
+
+//stack
+//cpp1 
+class Solution {
+public:
+    bool isValid(string s) {
+        stack<char> paren;
+        for (char& c : s) {
+            switch (c) {
+                case '(': 
+                case '{': 
+                case '[': paren.push(c); break;
+                case ')': if (paren.empty() || paren.top()!='(') return false; else paren.pop(); break;
+                case '}': if (paren.empty() || paren.top()!='{') return false; else paren.pop(); break;
+                case ']': if (paren.empty() || paren.top()!='[') return false; else paren.pop(); break;
+                default: ; // pass
+            }
+        }
+        return paren.empty() ;
+    }
+};
+
+//cpp2
+class Solution {
+public:
+    bool isValid(string s) {
+	stack<char> c;
+    	for (int i = 0; i<s.size(); i++)
+    	{	
+    		if (c.empty() || (((c.top() + 0) != (s[i] - 1)) && ((c.top() + 0) != (s[i] - 2))))
+    			c.push(s[i]);
+    		else c.pop();
+    	}
+    	return c.empty();
+    }
+};
