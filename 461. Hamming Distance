@@ -19,7 +19,22 @@ Explanation:
 
 The above arrows point to positions where the corresponding bits are different.
 """
-#1 the quickest solution in python for now
+//n & (n-1) converts the right most 1 to 0
+
+//cpp
+class Solution {
+public:
+    int hammingDistance(int x, int y) {
+        int dist = 0, n = x ^ y; //xor: same->0, diff->1
+        while(n){
+            ++dist; //counts how may bits we have turned off(set to 0)
+            n &= n - 1; // turns off(set to 0) the right most 1 bit
+        }
+        return dist;
+    }
+};
+
+#python1 the quickest solution in python for now
 class Solution(object):
     def hammingDistance(self, x, y):
         """
@@ -34,7 +49,7 @@ class Solution(object):
             x = x & (x - 1)  ##number of ones in x has been reduced by one
         return y
         
-#2
+#python2
 class Solution(object):
     def hammingDistance(self, x, y):
         """
