@@ -5,6 +5,71 @@ Hint:
 A linked list can be reversed either iteratively or recursively. Could you implement both?
 ”“”
 
+//cpp
+
+//recursive
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        if (!head || !(head -> next))
+            return head; //if empty or only head
+        ListNode* node = reverseList(head->next);
+        head -> next -> next = head;
+        head -> next = NULL;
+        return node;
+    }
+};
+
+//iterative 1
+//faster than recursive
+//since the head pointer may also be modified, we create a new_head that points to it to facilitate the reverse process.
+//For the example list 1 -> 2 -> 3 -> 4 -> 5 in the problem statement
+//it will become 0 -> 1 -> 2 -> 3 -> 4 -> 5 (we init new_head -> val to be 0). 
+//Then we set a pointer pre to new_head and another cur to head. 
+//Then we keep inserting cur -> next after pre until cur becomes the last node. 
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        ListNode* new_head = new ListNode(0);
+        new_head -> next = head;
+        ListNode* pre = new_head;
+        ListNode* cur = head; 
+        while (cur && cur -> next) {   //while cur is not NULL, or the last one
+            ListNode* temp = pre -> next;
+            pre -> next = cur -> next;
+            cur -> next = cur -> next -> next; 
+            pre -> next -> next = temp;
+        }
+        return new_head -> next;
+    }
+}; 
+
+//iterative 2
+class Solution {
+public:
+     ListNode* reverseList(ListNode* head) {
+        ListNode *prev = NULL, *cur=head, *tmp;
+        while(cur){
+            tmp = cur->next;
+            cur->next = prev;
+            prev = cur;
+            cur = tmp;
+        }
+        return prev;
+   }
+};
+
+
+
+#PYTHON
 # 1.iterative
 # Definition for singly-linked list.
 # class ListNode(object):
