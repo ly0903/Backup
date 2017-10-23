@@ -5,7 +5,22 @@ Example:
 Given a = 1 and b = 2, return 3.
 """
 
+//cpp
+class Solution {
+public:
+    int getSum(int a, int b) {
+        int sum = a;
+        while(b){
+            sum = a ^ b; //sum of a and b without considering the carry
+            b = (a & b) << 1; //calculate the carry
+            a = sum; //add sum without the carry and carry
+        }
+        return sum;
+    }
+};
 
+
+#python
 class Solution(object):
     def getSum(self, a, b):
         """
@@ -13,7 +28,7 @@ class Solution(object):
         :type b: int
         :rtype: int
         """
-#1 faster
+#python1 faster
         MAX_INT = 0x7FFFFFFF
         MIN_INT = 0x80000000
         MASK = 0x100000000
@@ -21,7 +36,7 @@ class Solution(object):
             a, b = (a ^ b) % MASK, ((a & b) << 1) % MASK
         return a if a <= MAX_INT else ~((a % MIN_INT) ^ MAX_INT)
         
-#2       
+#python2       
         # 32 bits integer max
         MAX = 0x7FFFFFFF
         # 32 bits interger min
